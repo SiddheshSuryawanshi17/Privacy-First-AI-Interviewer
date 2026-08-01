@@ -1,58 +1,66 @@
 # Privacy-First AI Interviewer 🎙️🔒
 
-> A fully offline, single-machine spoken mock-interview app powered by **Gemma 4** (via Ollama).
-> Nothing you say ever leaves your device.
+> A 100% offline, single-machine spoken mock-interview platform powered by **Gemma 4** (`gemma4:4b` / `gemma4:e4b` via Ollama).  
+> Nothing you say, upload, or record ever leaves your local device.
 
-[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
+[![Gemma 4](https://img.shields.io/badge/Model-Gemma%204-purple.svg)](https://ollama.com/library/gemma4)
+[![100% Offline](https://img.shields.io/badge/Privacy-100%25%20Offline-success.svg)](#-privacy-guarantee)
 
 ---
 
-## What It Does
+## 🌟 Overview & Key Capabilities
 
-1. **Listens** to you speak via your browser microphone.
-2. **Transcribes** your answer locally using `faster-whisper` (no cloud STT).
-3. **Asks intelligent follow-ups** using Gemma 4 (via Ollama) — same model does both reasoning and evaluation.
-4. **Speaks** each question aloud using Piper TTS.
-5. **Scores** your full session across 5 rubric dimensions (structured JSON from Gemma 4).
-6. **Generates** a recruiter-ready PDF report with your scorecard and full transcript.
+The **Privacy-First AI Interviewer** is designed for candidates, campus placement drives, and privacy-sensitive organizations needing realistic interview practice without data leakage, cloud API bills, or network latency.
+
+### 🤖 Gemma 4 at the Core (3 Distinct Roles)
+Gemma 4 isn't just a chatbot bolted on top — it drives three critical capabilities locally:
+1. **Resume-Aware Reasoning**: Ingests uploaded PDF/text resumes, auto-detects interview role/domain, and generates time-calibrated questions anchored directly in the candidate's real project experience.
+2. **Native Audio Perception**: Listens directly to candidate audio waves via Gemma 4 native perception (`stt/gemma_audio.py`), backed by `faster-whisper` fast fallback and live fluency signal analysis (`stt/confidence.py`).
+3. **Structured 5-Dimension Rubric Evaluation**: Evaluates completed sessions across *Domain Knowledge*, *Problem Solving*, *Communication*, *Depth of Expertise*, and *Practical Trade-offs*, outputting strict, typed JSON for instant feedback.
 
 ---
 
-## Tech Stack
+## ✨ Features
 
-| Layer | Choice | Why |
+- 🔒 **100% Offline Execution**: Zero external API calls during interview sessions.
+- 📄 **Resume PDF Parsing & Role Auto-Detection**: Extracts resume text via multi-library fallback (`pypdf` -> `PyPDF2` -> `pdfplumber`), automatically classifies candidate domain, and flags mismatch suggestions with 1-click alignment.
+- 📊 **Local ATS Resume Scoring**: Computes keyword match %, matched/missing keywords, and actionable recommendations locally/offline using `ats-resume-checker`.
+- ⏱️ **Configurable Session Controls**: Choose 3, 5, 7, or 10 questions with per-question timers (60s/90s/120s) and synthesized warning tones at 66% (amber) and 90% (red) elapsed time.
+- 🎨 **Polished Dark Theme UI**: Custom CSS design system (`theme.css`), 3-step progress bar (`Setup → Interview → Report`), Score Hero Ring, dark Plotly radar & bar charts, and collapsible full transcript.
+- 📄 **Recruiter-Ready PDF Reports**: End-of-session ReportLab PDF report generation with per-dimension scores, justifications, ATS match analysis, and complete transcript appendix.
+- 🎬 **Hackathon Demo Script**: Includes a rubric-optimized 3-minute video script & production checklist ([demo_video_script.md](file:///Users/siddhesh/Downloads/ml-interviewer-B1/ai-interviewer/demo_video_script.md)).
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology | Role & Rationale |
 |---|---|---|
-| UI | Gradio | Built-in mic component, offline-capable local server |
-| STT | faster-whisper (`small`) | pip-installable, CPU-friendly, no GPU required |
-| LLM Runtime | Ollama | One-command install, serves Gemma 4 locally |
-| Core Model | Gemma 4 E4B (`gemma4:4b`) | Best reasoning/speed for laptop; Apache-2.0 licensed |
-| Memory | Python list + SQLite | Zero infra, survives restarts |
-| TTS | Piper | Fast on CPU, simple CLI/Python API |
-| Report | ReportLab | Direct PDF, no browser dependency |
+| **Core Model** | **Gemma 4 E4B (`gemma4:4b`)** | Reasoning, question generation, audio perception, and rubric scoring |
+| **LLM Runtime** | **Ollama** | Local, low-latency execution server for Gemma 4 |
+| **UI Framework** | **Gradio + Custom CSS** | Dark theme design system (`theme.css`) with 3-screen step workflow |
+| **STT Fallback** | **faster-whisper (`small`)** | Local CPU-friendly speech-to-text fallback |
+| **Fluency Engine** | Custom Heuristic (`stt/confidence.py`) | Filler word & hedging signal analyzer |
+| **ATS Checker** | `ats-resume-checker` | Local/offline keyword extraction and match scoring |
+| **PDF Extraction** | `pypdf`, `PyPDF2`, `pdfplumber` | Multi-library robust fallback resume text extractor |
+| **TTS Engine** | **Piper TTS** | Fast, local speech synthesis for spoken interviewer questions |
+| **Storage & Memory**| **SQLite (`interview_sessions.db`)** | Zero-infra local session & turn persistence |
+| **Report Generation**| **ReportLab + Plotly** | PDF export and interactive dark radar/bar scorecard charts |
 
 ---
 
-## Hardware Requirements
+## 🚀 Quick Start
 
-- **Minimum:** 8 GB RAM, quad-core CPU, working mic/speakers → runs E4B comfortably.
-- **Recommended:** 16 GB RAM or RTX 3060+ GPU → enables the 12B model for higher-quality reasoning.
-- **Network:** Only needed for one-time model downloads. No internet required during the interview.
-
----
-
-## Setup
-
-### 1. Install Ollama & pull Gemma 4
-
+### 1. Install & Serve Ollama with Gemma 4
 ```bash
 # Install Ollama from https://ollama.ai
 ollama pull gemma4:4b
-ollama serve   # keep this running in a separate terminal
+ollama serve   # Run in a separate terminal window
 ```
 
-### 2. Create a Python virtual environment
-
+### 2. Environment Setup
 ```bash
 cd ai-interviewer
 python3 -m venv .venv
@@ -60,99 +68,65 @@ source .venv/bin/activate     # macOS / Linux
 # .venv\Scripts\activate      # Windows
 ```
 
-### 3. Install dependencies
-
+### 3. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-> **Piper TTS on macOS:** If `piper-tts` fails to install, download the binary from
-> [rhasspy/piper releases](https://github.com/rhasspy/piper/releases) and place it on your `PATH`.
-> The app will detect and use the CLI binary automatically.
+> **macOS Piper Note**: If `piper-tts` needs binary setup on macOS, download the binary from [rhasspy/piper releases](https://github.com/rhasspy/piper/releases) and place it on your `PATH`.
 
-### 4. Run the app
-
+### 4. Launch Application
 ```bash
-python app.py
-# Open http://localhost:7860 in your browser
+PYTHONPATH=. python app.py
 ```
-
-If Ollama isn't running or the model isn't pulled, the app will show a clear error banner before the interview starts — it never fails mid-session.
+Open **`http://127.0.0.1:7860`** in your browser.
 
 ---
 
-## Running Tests
+## 🧪 Testing
 
-All tests are deterministic and require **no live Ollama/model calls**:
+Run the full deterministic test suite (requires no live network or Ollama calls):
 
 ```bash
-cd ai-interviewer
-pytest tests/ -v --tb=short
+PYTHONPATH=. pytest tests/ -v
 ```
-
-Expected output: all tests in `test_parser.py`, `test_transcribe.py`, `test_db.py`, `test_report.py`, `test_client.py` pass.
+All **81 unit & integration tests** pass deterministically.
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 ai-interviewer/
-├── app.py                  # Gradio entrypoint (3-screen UI)
-├── requirements.txt
-├── stt/
-│   └── transcribe.py       # faster-whisper wrapper
+├── app.py                      # Main Gradio application (Setup, Live Interview, Report)
+├── theme.css                   # Dark theme design system (colors, cards, step indicators)
+├── demo_video_script.md        # Rubric-optimized 3-minute hackathon demo video script
+├── requirements.txt            # Python dependencies
 ├── llm/
-│   ├── client.py           # Ollama/Gemma 4 HTTP wrapper
-│   ├── prompts.py          # System prompts, rubric, JSON schema
-│   └── parser.py           # Defensive JSON extraction
-├── memory/
-│   ├── db.py               # SQLite CRUD
-│   └── schema.sql          # sessions / turns / scores schema
+│   ├── client.py               # Ollama Gemma 4 API wrapper & token budget handling
+│   ├── prompts.py              # Resume-anchored system prompts & JSON schemas
+│   └── parser.py               # Defensive JSON parsing & fallback scorecard
+├── stt/
+│   ├── gemma_audio.py          # Gemma 4 native audio perception engine
+│   ├── transcribe.py           # faster-whisper local STT wrapper
+│   ├── confidence.py           # Fluency signal analysis (filler/hedging detector)
+│   └── vad.py                  # Voice Activity Detection (silence detection)
 ├── tts/
-│   └── speak.py            # Piper TTS wrapper
+│   └── speak.py                # Piper TTS local voice synthesizer
+├── utils/
+│   ├── resume.py               # Resume text extraction & role auto-detection
+│   └── ats.py                  # Local ATS resume compatibility analyzer
+├── memory/
+│   └── db.py                   # SQLite database persistence
 ├── report/
-│   └── generate_report.py  # ReportLab PDF builder
-├── data/                   # SQLite DB + Piper voice models
-└── tests/
-    ├── conftest.py
-    ├── test_parser.py
-    ├── test_transcribe.py
-    ├── test_db.py
-    ├── test_report.py
-    └── test_client.py
+│   └── generate_report.py      # ReportLab PDF generator
+└── tests/                      # 81 automated tests
 ```
 
 ---
 
-## Definition of Done ✅
+## 🔒 Privacy Guarantee
 
-> A judge can start the app **with no internet connection**, speak 3–4 answers to spoken/on-screen questions, and receive a **downloadable PDF report** with per-dimension scores and justifications, entirely on one machine.
-
----
-
-## Privacy Guarantee
-
-- Audio bytes are transcribed locally and immediately discarded (never written to disk permanently).
-- Transcripts and scores are stored only in the local SQLite DB (`data/interview_sessions.db`).
-- No network calls are made during an interview session — only the one-time model downloads require internet.
-
----
-
-## Interview Roles
-
-| Role | Focus Areas |
-|---|---|
-| Backend Engineer | APIs, databases, caching, concurrency, debugging |
-| HR Round | STAR behavioural questions, motivation, teamwork |
-| System Design | Distributed systems, trade-offs, capacity estimation |
-
----
-
-## Stretch Goals (post-MVP)
-
-- Gemma 4 native audio for one demo turn (bypasses faster-whisper entirely, 30s clip cap applies).
-- Resume/JD keyword upload → question seeding.
-- ChromaDB/FAISS RAG over past interview sessions.
-- Real-time coaching hints during the answer.
-- Multi-language support (Gemma 4 supports 140+ languages).
+- Audio streams are processed locally and discarded immediately.
+- Transcripts, scores, and PDF reports stay inside your local workspace (`data/`).
+- Zero telemetry, zero cloud calls, zero external API costs.
