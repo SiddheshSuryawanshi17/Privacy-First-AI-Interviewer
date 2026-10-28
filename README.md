@@ -13,7 +13,7 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](CONTRIBUTING.md)
 
 <!-- Demo video is hosted as a release asset to keep the repo small -->
-[![Watch the demo](docs/assets/thumbnail.png)](https://github.com/SiddheshSuryawanshi17/privacy-first-ai-interviewer/releases/download/v1.0.0/mlinterview.mp4)
+[![Watch the demo](docs/assets/thumbnail.png)](https://github.com/SiddheshSuryawanshi17/Privacy-First-AI-Interviewer/releases/download/v1.0.0/mlinterview.mp4)
 
 <sub>▶️ Click the image to watch the demo video.</sub>
 
@@ -73,8 +73,8 @@ ollama pull gemma4:4b
 ollama serve
 
 # 2. Clone and set up
-git clone https://github.com/SiddheshSuryawanshi17/privacy-first-ai-interviewer.git
-cd privacy-first-ai-interviewer
+git clone https://github.com/SiddheshSuryawanshi17/Privacy-First-AI-Interviewer.git
+cd Privacy-First-AI-Interviewer
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
