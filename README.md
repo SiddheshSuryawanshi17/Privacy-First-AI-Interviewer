@@ -171,7 +171,7 @@ Built at the ML Nashik Hackathon by:
 - **Siddhesh Suryawanshi** — [@SiddheshSuryawanshi17](https://github.com/SiddheshSuryawanshi17)
 - **Ayush Patel** — [@Ayushpate2003](https://github.com/Ayushpate2003)
 - **Rutuja Kulkarni** — [@RutujaKulkarni-23](https://github.com/RutujaKulkarni-23)
-- **Tanishka Prasad Jadhav**
+- **Tanishka Prasad Jadhav** — [@tanishka-jadhav](https://github.com/tanishka-jadhav)
 
 The original team repository, where the hackathon work happened, is [Ayushpate2003/ml-interviewer](https://github.com/Ayushpate2003/ml-interviewer).
 
