@@ -55,9 +55,11 @@ def test_plotly_chart_creation_graceful_fallback_on_invalid_data():
     assert _create_report_charts({"dimensions": []}) == (None, None)
 
 
+@patch("app.check_ollama_ready", return_value=(True, ""))
+@patch("app.speak", return_value=b"fake-audio")
 @patch("app.get_next_question", side_effect=_mock_llm_response)
 @patch("app.score_session", side_effect=_mock_score_session)
-def test_full_5_question_session_e2e(mock_score, mock_q):
+def test_full_5_question_session_e2e(mock_score, mock_q, mock_speak, mock_ready):
     """
     Simulate a full 5-question interview flow from setup to Q5 report generation.
     """
@@ -95,9 +97,11 @@ def test_full_5_question_session_e2e(mock_score, mock_q):
     assert pdf_path is not None and pdf_path.endswith(".pdf")
 
 
+@patch("app.check_ollama_ready", return_value=(True, ""))
+@patch("app.speak", return_value=b"fake-audio")
 @patch("app.get_next_question", side_effect=_mock_llm_response)
 @patch("app.score_session", side_effect=_mock_score_session)
-def test_3x_back_to_back_full_sessions(mock_score, mock_q):
+def test_3x_back_to_back_full_sessions(mock_score, mock_q, mock_speak, mock_ready):
     """
     Acceptance Criteria 4: Run full flow 3 times back-to-back to confirm stability.
     """

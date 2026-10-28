@@ -39,7 +39,7 @@ Use the **exact same role string** everywhere (e.g. `"AI/ML Engineer"`); it's us
 ## Test it
 
 1. Add a case to `tests/test_role_detection.py` (role detection) and `tests/test_ats.py` (keyword scoring).
-2. Run `python -m pytest tests/ -k "not e2e"`.
+2. Run `python -m pytest tests/`.
 3. Start the app, pick the new role, and do a short 3-question session to sanity-check the questions.
 
 ## Ideas for roles

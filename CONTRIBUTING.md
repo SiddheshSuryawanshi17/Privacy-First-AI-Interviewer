@@ -31,10 +31,9 @@ python app.py                           # http://127.0.0.1:7860
 1. **Open or claim an issue** first for anything bigger than a small fix, so work isn't duplicated.
 2. **Branch** from `main` with a descriptive name: `feat/cybersecurity-role`, `fix/timer-reset`, `docs/windows-setup`.
 3. **Make your change** and add or update tests in `tests/`.
-4. **Run the tests** — they're fully mocked, no Ollama or mic needed:
+4. **Run the tests** — they're fully mocked, no Ollama or mic needed (CI runs them on every PR too):
    ```bash
-   python -m pytest tests/ -k "not e2e"   # fast loop (~1 min)
-   python -m pytest tests/                # full suite before pushing (~8 min)
+   python -m pytest tests/   # ~10 seconds
    ```
 5. **Commit** using [Conventional Commits](https://www.conventionalcommits.org/), matching the existing history:
    `feat: add Cybersecurity interview role`, `fix: reset timer on skip`, `docs: add Windows setup notes`

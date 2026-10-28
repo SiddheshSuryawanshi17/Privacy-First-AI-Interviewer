@@ -9,7 +9,7 @@
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![Gemma 4](https://img.shields.io/badge/Model-Gemma%204-purple.svg)](https://ollama.com/library/gemma4)
 [![Runs Offline](https://img.shields.io/badge/Privacy-Runs%20Offline-success.svg)](#-privacy)
-[![Tests](https://img.shields.io/badge/Tests-125%20passing-brightgreen.svg)](#-running-tests)
+[![Tests](https://github.com/SiddheshSuryawanshi17/Privacy-First-AI-Interviewer/actions/workflows/tests.yml/badge.svg)](https://github.com/SiddheshSuryawanshi17/Privacy-First-AI-Interviewer/actions/workflows/tests.yml)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](CONTRIBUTING.md)
 
 <!-- Demo video is hosted as a release asset to keep the repo small -->
@@ -117,7 +117,7 @@ The suite mocks Ollama and audio, so it needs no network or GPU:
 python -m pytest tests/ -v
 ```
 
-The two end-to-end session tests take ~80 s each; skip them while iterating with `python -m pytest tests/ -k "not e2e"`.
+The whole suite runs in about 10 seconds, and runs automatically on every push and pull request via GitHub Actions.
 
 ## 📁 Project structure
 
@@ -162,7 +162,6 @@ Ideas on the roadmap:
 - [ ] More interview roles: AI/ML, Cybersecurity, Data Engineering, Mobile
 - [ ] Multilingual interviews (Hindi, Marathi, …)
 - [ ] Docker image for one-command setup
-- [ ] GitHub Actions CI
 - [ ] Coding-round mode with an in-browser editor
 
 ## 👥 Team
