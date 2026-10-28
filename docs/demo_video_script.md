@@ -10,7 +10,7 @@
 
 ## 📋 Feature Verification & Exclusion Audit
 
-Before scripting, all app features were audited against the active codebase ([app.py](file:///Users/siddhesh/Downloads/ml-interviewer-B1/ai-interviewer/app.py), [llm/client.py](file:///Users/siddhesh/Downloads/ml-interviewer-B1/ai-interviewer/llm/client.py), [utils/resume.py](file:///Users/siddhesh/Downloads/ml-interviewer-B1/ai-interviewer/utils/resume.py), [utils/ats.py](file:///Users/siddhesh/Downloads/ml-interviewer-B1/ai-interviewer/utils/ats.py), [stt/gemma_audio.py](file:///Users/siddhesh/Downloads/ml-interviewer-B1/ai-interviewer/stt/gemma_audio.py)):
+Before scripting, all app features were audited against the active codebase ([app.py](../app.py), [llm/client.py](../llm/client.py), [utils/resume.py](../utils/resume.py), [utils/ats.py](../utils/ats.py), [stt/gemma_audio.py](../stt/gemma_audio.py)):
 
 ### ✅ Confirmed Working Features (Included in Script & Shot Notes)
 1. **100% Offline Badge & Architecture**: Persistent status badge `🔒 100% Offline — nothing you say leaves this device`. Zero external API calls during interview execution.

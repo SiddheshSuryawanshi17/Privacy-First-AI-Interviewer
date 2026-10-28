@@ -1,5 +1,5 @@
 """
-tests/test_phase2_question_count.py
+tests/test_question_count.py
 ------------------------------------
 Unit tests for Phase 2: User-selectable question quantity (3 / 5 / 7 / 10).
 """

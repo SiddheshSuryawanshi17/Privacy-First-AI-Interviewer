@@ -1,5 +1,5 @@
 """
-tests/test_phase5_no_resume.py
+tests/test_no_resume.py
 -------------------------------
 Unit and integration tests for Phase 5: No-resume passthrough verification.
 """

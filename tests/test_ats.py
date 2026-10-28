@@ -1,5 +1,5 @@
 """
-tests/test_phase6_ats.py
+tests/test_ats.py
 -------------------------
 Unit tests for Phase 6: Local/offline ATS resume scoring and report integration.
 """

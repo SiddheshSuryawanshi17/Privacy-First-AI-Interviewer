@@ -1,5 +1,5 @@
 """
-tests/test_phase1_adaptive_difficulty.py
+tests/test_adaptive_difficulty.py
 -----------------------------------------
 Unit & integration tests for Phase 1: Adaptive Question Difficulty.
 Verifies quality signals, single-step difficulty transitions, system prompt rules,

@@ -29,11 +29,13 @@ wheels/
 .coverage
 htmlcov/
 
-# Application Data & Reports
-data/*.pdf
-data/*.db*
-ai-interviewer/data/*.pdf
-ai-interviewer/data/*.db*
+# Application data — interview sessions, reports & downloaded models (never commit personal data)
+data/*
+!data/.gitkeep
+
+# Large media (host demo videos externally)
+*.mp4
+*.mov
 
 # Environment variables
 .env

@@ -1,5 +1,5 @@
 """
-tests/test_phase1_role_detect.py
+tests/test_role_detection.py
 ---------------------------------
 Unit tests for Phase 1: Resume-driven role/domain auto-detection.
 """

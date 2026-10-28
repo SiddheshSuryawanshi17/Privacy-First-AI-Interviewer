@@ -1,5 +1,5 @@
 """
-tests/test_phase3_timer.py
+tests/test_timer.py
 --------------------------
 Unit tests for Phase 3: Per-question timer with non-blocking expiration and alerts.
 """

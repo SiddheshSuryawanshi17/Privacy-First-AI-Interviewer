@@ -1,5 +1,5 @@
 """
-tests/test_phase4_resume_synthesis.py
+tests/test_resume_synthesis.py
 --------------------------------------
 Unit & integration tests for Phase 4: Resume Improvement Suggestions.
 Verifies prompt construction, LLM synthesis, clean omission when no resume is uploaded,

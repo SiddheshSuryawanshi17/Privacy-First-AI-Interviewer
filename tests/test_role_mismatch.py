@@ -1,5 +1,5 @@
 """
-tests/test_phase4_role_mismatch.py
+tests/test_role_mismatch.py
 ------------------------------------
 Unit tests for Phase 4: Role-mismatch advisory suggestions and switch action.
 """

@@ -1,5 +1,5 @@
 """
-tests/test_phase2_coach_chat.py
+tests/test_coach_chat.py
 --------------------------------
 Unit & integration tests for Phase 2: Post-interview AI Coach Chat.
 Verifies grounding in session transcript & scorecard, scope restriction, and error fallback.

@@ -1,5 +1,5 @@
 """
-tests/test_phase3_model_answers.py
+tests/test_model_answers.py
 -----------------------------------
 Unit & integration tests for Phase 3: Model-Answer Comparison.
 Verifies model-answer prompt generation, LLM parsing, UI details formatting, and PDF rendering.
