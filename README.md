@@ -1,162 +1,171 @@
- # Privacy-First AI Interviewer 🎙️🔒
+# Privacy-First AI Interviewer 🎙️🔒
 
-> A 100% offline, single-machine spoken mock-interview platform powered by **Gemma 4** (`gemma4:4b` / `gemma4:e4b` via Ollama).  
-> Nothing you say, upload, or record ever leaves your local device.
+> A spoken mock-interview platform that runs entirely on your own machine, powered by **Gemma 4** via Ollama.
+> Your voice, resume, and answers never leave your device.
+
+🏆 **Winner — ML Nashik Hackathon (30 July 2026)**
 
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-green.svg)](LICENSE)
 [![Gemma 4](https://img.shields.io/badge/Model-Gemma%204-purple.svg)](https://ollama.com/library/gemma4)
-[![100% Offline](https://img.shields.io/badge/Privacy-100%25%20Offline-success.svg)](#-privacy-guarantee)
-[![Tests](https://img.shields.io/badge/Tests-125%20Passed-brightgreen.svg)](#-testing)
+[![Runs Offline](https://img.shields.io/badge/Privacy-Runs%20Offline-success.svg)](#-privacy)
+[![Tests](https://img.shields.io/badge/Tests-125%20passing-brightgreen.svg)](#-running-tests)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](CONTRIBUTING.md)
+
+<!-- TODO: upload mlinterview.mp4 to YouTube or a GitHub Release and replace DEMO_VIDEO_URL below -->
+[![Watch the demo](docs/assets/thumbnail.png)](DEMO_VIDEO_URL)
 
 ---
 
-## 🎬 Demo Video
+## Why this exists
 
-https://github.com/Ayushpate2003/ml-interviewer/raw/main/mlinterview.mp4
-
-## 🌐 Portable Fallback for Kaggle Writeup & External Platforms
-
-[![Privacy-First AI Interviewer Demo Video](thumbnail.png)](https://github.com/Ayushpate2003/ml-interviewer/raw/main/mlinterview.mp4)
-
-> 💡 **Kaggle / External Writeup Note**: GitHub's inline video player does not embed on external sites like Kaggle. Use the clickable thumbnail snippet above, or replace `VIDEO_URL_HERE` with your unlisted YouTube/Drive link:  
-> `[![Demo Video](thumbnail.png)](VIDEO_URL_HERE)`
-
----
-
-## 🌟 Overview & Key Capabilities
-
-The **Privacy-First AI Interviewer** is designed for candidates, campus placement drives, and privacy-sensitive organizations needing realistic interview practice without data leakage, cloud API bills, or network latency.
-
-### 🤖 Gemma 4 at the Core (3 Distinct Roles)
-Gemma 4 isn't just a chatbot bolted on top — it drives three critical capabilities locally:
-1. **Resume-Aware Reasoning**: Ingests uploaded PDF/text resumes and pasted Job Descriptions, auto-detects interview role/domain, and generates time-calibrated questions anchored directly in the candidate's real project experience and target JD requirements.
-2. **Native Audio Perception**: Listens directly to candidate audio waves via Gemma 4 native perception (`stt/gemma_audio.py`), backed by `faster-whisper` fast fallback and live fluency signal analysis (`stt/confidence.py`).
-3. **Structured 5-Dimension Rubric Evaluation**: Evaluates completed sessions across *Domain Knowledge*, *Problem Solving*, *Communication*, *Depth of Expertise*, and *Practical Trade-offs*, outputting strict, typed JSON for instant feedback.
-
----
+Mock interviews with cloud AI tools mean uploading your resume and recording your voice to someone else's server. This project does the whole loop — speech-to-text, question generation, evaluation, and the final report — locally, so students, placement cells, and privacy-sensitive teams can practise without leaking data or paying for API calls.
 
 ## ✨ Features
 
-- 🔒 **100% Offline Execution**: Zero external API calls during interview sessions.
-- 📄 **Resume PDF Parsing & Role Auto-Detection**: Extracts resume text via multi-library fallback (`pypdf` → `PyPDF2` → `pdfplumber`), automatically classifies candidate domain, and flags mismatch suggestions with 1-click alignment.
-- 📋 **Job Description (JD) Support**: Paste any JD text directly — the system auto-detects the target role, grounds interview questions in real JD requirements, and provides a JD-aligned ATS compatibility score. Safely handles long JD text without any OS errors.
-- 📊 **Local ATS Resume Scoring**: Computes keyword match %, matched/missing keywords, and actionable recommendations locally/offline using `ats-resume-checker`.
-- 📝 **Per-Question Detailed Feedback**: After each session, the Report tab shows an in-depth per-question evaluation with 5-dimension scores (Technical Depth, Communication Clarity, Confidence Fluency, STAR Completeness, Problem Solving), knowledge gaps, model answer examples, and actionable practice recommendations — all included in the PDF export.
-- ⏱️ **Dynamic Per-Question Timer**: Live countdown timer that dynamically ticks down during recording, resets to the full duration on every new question, and plays warning tones at 66% (amber) and 90% (red) elapsed time.
-- ⚙️ **Configurable Session Controls**: Choose 3, 5, 7, or 10 questions with per-question timers (60s/90s/120s).
-- 🎨 **Polished Dark Theme UI**: Custom CSS design system (`theme.css`), 3-step progress bar (`Setup → Interview → Report`), Score Hero Ring, dark Plotly radar & bar charts, and collapsible full transcript.
-- 📄 **Recruiter-Ready PDF Reports**: End-of-session ReportLab PDF report with overall scores, per-question detailed feedback, ATS match analysis, and complete transcript appendix.
-- 🎬 **Hackathon Demo Script**: Includes a rubric-optimized 3-minute video script & production checklist ([demo_video_script.md](ai-interviewer/demo_video_script.md)).
+| | |
+|---|---|
+| 🎤 **Spoken interviews** | Answer out loud; local Whisper transcribes, Piper reads questions aloud |
+| 📄 **Resume & JD aware** | Upload a PDF resume and/or paste a job description — questions are anchored in *your* projects and the JD's requirements |
+| 🧭 **Role auto-detection** | Detects the best-fit role from your resume/JD and suggests a switch if you picked a mismatched one |
+| 📈 **Adaptive difficulty** | Gemma assesses each answer and escalates or eases off one step at a time |
+| 📊 **Offline ATS score** | Keyword match %, missing skills, and suggestions — computed locally |
+| 📝 **Detailed report** | 5-dimension scorecard, per-question feedback, model answers, radar/bar charts, and a downloadable PDF |
+| 💬 **AI coach chat** | Ask follow-up questions about your performance after the session |
+| ⏱️ **Session controls** | 3 / 5 / 7 / 10 questions, 60 / 90 / 120 s per-question timer with warning tones |
+| 🌗 **Light & dark themes** | One-click toggle, remembered in the browser |
 
----
+### Interview roles
 
-## 🛠️ Tech Stack
+`Backend Engineer` · `Frontend Engineer` · `DevOps / SRE` · `Cloud Computing` · `System Design` · `HR Round`
 
-| Layer | Technology | Role & Rationale |
-|---|---|---|
-| **Core Model** | **Gemma 4 E4B (`gemma4:e4b`)** | Reasoning, question generation, audio perception, per-question feedback & rubric scoring |
-| **LLM Runtime** | **Ollama** | Local, low-latency execution server for Gemma 4 |
-| **UI Framework** | **Gradio + Custom CSS** | Dark theme design system (`theme.css`) with 3-screen step workflow |
-| **STT Fallback** | **faster-whisper (`small`)** | Local CPU-friendly speech-to-text fallback |
-| **Fluency Engine** | Custom Heuristic (`stt/confidence.py`) | Filler word & hedging signal analyzer |
-| **ATS Checker** | `ats-resume-checker` | Local/offline keyword extraction and match scoring |
-| **PDF Extraction** | `pypdf`, `PyPDF2`, `pdfplumber` | Multi-library robust fallback resume & JD text extractor |
-| **TTS Engine** | **Piper TTS** | Fast, local speech synthesis for spoken interviewer questions |
-| **Storage & Memory**| **SQLite (`interview_sessions.db`)** | Zero-infra local session & turn persistence |
-| **Report Generation**| **ReportLab + Plotly** | PDF export and interactive dark radar/bar scorecard charts |
+**Wanted:** AI/ML, Cybersecurity, Data Engineering, Mobile… → see [Adding a new interview role](docs/adding_a_role.md). It's a great first contribution.
 
----
+## 🛠️ Tech stack
 
-## 🚀 Quick Start
+| Layer | Technology |
+|---|---|
+| LLM | **Gemma 4** (`gemma4:4b` by default) served by **Ollama** |
+| UI | Gradio 4 + custom CSS (`theme.css`) |
+| Speech-to-text | Gemma 4 native audio, with `faster-whisper` fallback |
+| Voice activity detection | Silero VAD (optional) |
+| Text-to-speech | Piper TTS |
+| Resume parsing | `pypdf` → `PyPDF2` → `pdfplumber` fallback chain |
+| ATS scoring | `ats-resume-checker` + built-in keyword fallback |
+| Storage | SQLite (`data/interview_sessions.db`) |
+| Reports | ReportLab (PDF) + Plotly (charts) |
 
-### 1. Install & Serve Ollama with Gemma 4
+## 🚀 Quick start
+
+**Prerequisites:** Python 3.9+, [Ollama](https://ollama.com), 8 GB+ RAM recommended, a microphone.
+
 ```bash
-# Install Ollama from https://ollama.ai
-ollama pull gemma4:e4b
-ollama serve   # Run in a separate terminal window
-```
+# 1. Get a Gemma 4 model and start Ollama (keep this terminal open)
+ollama pull gemma4:4b
+ollama serve
 
-### 2. Environment Setup
-```bash
-cd ai-interviewer
+# 2. Clone and set up
+git clone https://github.com/Ayushpate2003/ml-interviewer.git
+cd ml-interviewer
 python3 -m venv .venv
-source .venv/bin/activate     # macOS / Linux
-# .venv\Scripts\activate      # Windows
-```
-
-### 3. Install Dependencies
-```bash
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+
+# 3. Run
+python app.py
 ```
 
-> **macOS Piper Note**: If `piper-tts` needs binary setup on macOS, download the binary from [rhasspy/piper releases](https://github.com/rhasspy/piper/releases) and place it on your `PATH`.
+Open **http://127.0.0.1:7860**.
 
-### 4. Launch Application
+> **First run:** the Whisper speech model and Piper voice (~60 MB) are downloaded once into the local cache / `data/`. After that the app works with no internet connection.
+
+### Configuration
+
+All settings are optional environment variables — copy [`.env.example`](.env.example) to see them:
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `OLLAMA_BASE_URL` | `http://localhost:11434` | Where Ollama is running |
+| `OLLAMA_MODEL` | `gemma4:4b` | Preferred model (falls back to any installed Gemma model) |
+| `OLLAMA_TIMEOUT` | `300` | LLM request timeout in seconds |
+| `PIPER_VOICE` | `en_US-lessac-medium` | Piper voice name |
+| `PIPER_BIN` | `piper` | Path to the Piper binary |
+
+> **macOS + Piper:** if the `piper-tts` wheel misbehaves, download the binary from [rhasspy/piper releases](https://github.com/rhasspy/piper/releases) and point `PIPER_BIN` at it.
+
+### Optional extras
+
 ```bash
-PYTHONPATH=. python app.py
+pip install silero-vad        # automatic end-of-speech detection
+pip install streamlit         # session analytics dashboard:
+streamlit run report_viewer/streamlit_app.py
 ```
-Open **`http://127.0.0.1:7860`** in your browser.
 
----
+## 🧪 Running tests
 
-## 🧪 Testing
-
-Run the full deterministic test suite (requires no live network or Ollama calls):
+The suite mocks Ollama and audio, so it needs no network or GPU:
 
 ```bash
-PYTHONPATH=. pytest tests/ -v
+python -m pytest tests/ -v
 ```
-All **125 unit & integration tests** pass deterministically across 12 test files.
 
----
+The two end-to-end session tests take ~80 s each; skip them while iterating with `python -m pytest tests/ -k "not e2e"`.
 
-## 📁 Project Structure
+## 📁 Project structure
 
 ```
-ai-interviewer/
-├── app.py                      # Main Gradio application (Setup, Live Interview, Report)
-├── theme.css                   # Dark theme design system (colors, cards, step indicators)
-├── demo_video_script.md        # Rubric-optimized 3-minute hackathon demo video script
-├── requirements.txt            # Python dependencies
+.
+├── app.py                  # Gradio app: Setup → Interview → Report
+├── theme.css               # Design system (light & dark)
 ├── llm/
-│   ├── client.py               # Ollama Gemma 4 API wrapper, token budget & per-question feedback
-│   ├── prompts.py              # Resume/JD-anchored system prompts, JSON schemas & per-question schema
-│   └── parser.py               # Defensive JSON parsing & fallback scorecard
+│   ├── client.py           # Ollama/Gemma wrapper: questions, scoring, feedback, coach chat
+│   ├── prompts.py          # System prompts & per-role focus areas
+│   └── parser.py           # Defensive JSON parsing with fallback scorecard
 ├── stt/
-│   ├── gemma_audio.py          # Gemma 4 native audio perception engine
-│   ├── transcribe.py           # faster-whisper local STT wrapper
-│   ├── confidence.py           # Fluency signal analysis (filler/hedging detector)
-│   └── vad.py                  # Voice Activity Detection (silence detection)
-├── tts/
-│   └── speak.py                # Piper TTS local voice synthesizer
+│   ├── gemma_audio.py      # Gemma 4 native audio transcription
+│   ├── transcribe.py       # faster-whisper fallback
+│   ├── vad.py              # Silero voice activity detection
+│   └── confidence.py       # Filler-word / hedging fluency signal
+├── tts/speak.py            # Piper TTS (auto-downloads the voice)
 ├── utils/
-│   ├── resume.py               # Resume/JD text extraction, role auto-detection (safe long-string handling)
-│   └── ats.py                  # Local ATS resume compatibility analyzer (JD-aware scoring)
-├── memory/
-│   └── db.py                   # SQLite database persistence
-├── report/
-│   └── generate_report.py      # ReportLab PDF generator (incl. per-question feedback section)
-└── tests/                      # 125 automated tests across 12 test files
-    ├── test_app.py
-    ├── test_e2e_flow.py
-    ├── test_jd_integration.py
-    ├── test_per_question_feedback.py
-    ├── test_phase1_adaptive_difficulty.py
-    ├── test_phase2_question_count.py
-    ├── test_phase3_timer.py
-    ├── test_phase5_no_resume.py
-    ├── test_phase6_ats.py
-    ├── test_report.py
-    ├── test_unified_loading.py
-    └── test_vad.py
+│   ├── resume.py           # Resume/JD extraction & role detection
+│   └── ats.py              # Offline ATS scoring & role keyword lists
+├── memory/                 # SQLite schema + persistence
+├── report/                 # PDF report generator
+├── report_viewer/          # Optional Streamlit analytics dashboard
+├── tests/                  # 125 pytest tests
+├── data/                   # Runtime data (git-ignored): DB, reports, voices
+└── docs/                   # Contributor guides, demo script, dev log
 ```
 
----
+## 🔒 Privacy
 
-## 🔒 Privacy Guarantee
+- All inference runs on your machine through Ollama — no cloud APIs, no telemetry.
+- Audio is transcribed locally and not kept after transcription.
+- Sessions, transcripts, and PDF reports are written only to `data/`, which is git-ignored so personal data can't be committed by accident.
+- The only network access is the one-time model download on first run.
 
-- Audio streams are processed locally and discarded immediately after transcription.
-- Transcripts, scores, and PDF reports stay inside your local workspace (`data/`).
-- JD text and resume content never leave your machine.
-- Zero telemetry, zero cloud calls, zero external API costs.
+## 🤝 Contributing
+
+Contributions of all sizes are welcome — new interview roles, UI polish, better prompts, more languages, bug fixes, docs. Start with [CONTRIBUTING.md](CONTRIBUTING.md), and please follow our [Code of Conduct](CODE_OF_CONDUCT.md).
+
+Ideas on the roadmap:
+
+- [ ] More interview roles: AI/ML, Cybersecurity, Data Engineering, Mobile
+- [ ] Multilingual interviews (Hindi, Marathi, …)
+- [ ] Docker image for one-command setup
+- [ ] GitHub Actions CI
+- [ ] Coding-round mode with an in-browser editor
+
+## 👥 Team
+
+Built at the ML Nashik Hackathon by:
+
+- **Siddhesh Suryawanshi** — [@SiddheshSuryawanshi17](https://github.com/SiddheshSuryawanshi17)
+- **Ayush Patel** — [@Ayushpate2003](https://github.com/Ayushpate2003)
+- **Rutuja Kulkarni** — [@RutujaKulkarni-23](https://github.com/RutujaKulkarni-23)
+- **Tanishka Prasad Jadhav**
+
+## 📄 License
+
+[Apache License 2.0](LICENSE)

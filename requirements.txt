@@ -27,3 +27,8 @@ pdfplumber>=0.11.0
 # ── Utilities ──────────────────────────────────────────────────────────────────
 numpy>=1.26.0                  # faster-whisper dependency
 soundfile>=0.13.1              # required by stt/gemma_audio.py
+
+# ── Optional extras (app degrades gracefully without them) ─────────────────────
+# silero-vad                   # automatic end-of-speech detection (stt/vad.py)
+# PyPDF2                       # extra PDF extraction fallback (utils/resume.py)
+# streamlit                    # analytics dashboard (report_viewer/streamlit_app.py)
