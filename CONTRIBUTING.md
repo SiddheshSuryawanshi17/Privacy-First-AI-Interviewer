@@ -17,8 +17,8 @@ Not sure where to start? Open an issue and ask — we're happy to help.
 
 ```bash
 # Fork on GitHub, then:
-git clone https://github.com/<your-username>/ml-interviewer.git
-cd ml-interviewer
+git clone https://github.com/<your-username>/privacy-first-ai-interviewer.git
+cd privacy-first-ai-interviewer
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 

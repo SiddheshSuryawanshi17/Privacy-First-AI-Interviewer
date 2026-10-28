@@ -12,8 +12,16 @@
 [![Tests](https://img.shields.io/badge/Tests-125%20passing-brightgreen.svg)](#-running-tests)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-orange.svg)](CONTRIBUTING.md)
 
-<!-- TODO: upload mlinterview.mp4 to YouTube or a GitHub Release and replace DEMO_VIDEO_URL below -->
-[![Watch the demo](docs/assets/thumbnail.png)](DEMO_VIDEO_URL)
+<!-- Demo video is hosted as a release asset to keep the repo small -->
+[![Watch the demo](docs/assets/thumbnail.png)](https://github.com/SiddheshSuryawanshi17/privacy-first-ai-interviewer/releases/download/v1.0.0/mlinterview.mp4)
+
+<sub>▶️ Click the image to watch the demo video.</sub>
+
+### Screenshots
+
+| Live interview | Report & AI coach |
+|---|---|
+| ![Answer screen with live transcription, fluency signal and VAD status](docs/assets/interview_screen.jpg) | ![Report with 5-dimension scorecard, ATS match, charts and coach chat](docs/assets/report_page.jpg) |
 
 ---
 
@@ -65,8 +73,8 @@ ollama pull gemma4:4b
 ollama serve
 
 # 2. Clone and set up
-git clone https://github.com/Ayushpate2003/ml-interviewer.git
-cd ml-interviewer
+git clone https://github.com/SiddheshSuryawanshi17/privacy-first-ai-interviewer.git
+cd privacy-first-ai-interviewer
 python3 -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
@@ -165,6 +173,8 @@ Built at the ML Nashik Hackathon by:
 - **Ayush Patel** — [@Ayushpate2003](https://github.com/Ayushpate2003)
 - **Rutuja Kulkarni** — [@RutujaKulkarni-23](https://github.com/RutujaKulkarni-23)
 - **Tanishka Prasad Jadhav**
+
+The original team repository, where the hackathon work happened, is [Ayushpate2003/ml-interviewer](https://github.com/Ayushpate2003/ml-interviewer).
 
 ## 📄 License
 
